@@ -247,7 +247,20 @@ class Form extends React.Component {
                         <StyledSubmitButton onClick={() => this.modalDetalhe()}>
                             {this.state.modal ? "ola" : "Detalhes" }
                         </StyledSubmitButton>  
-                        {this.state.modal && (<p style={{color: "#fff"}}>ola</p>)}                      
+                        {this.state.modal && (<p style={{color: "#fff"}}>
+                            <ul>
+                                <li style={{listStyle: 'none', padding: '0 8px'}}>Nome : {formulario.nome} </li>
+                                
+                                <li style={{listStyle: 'none', padding: '0 8px'}}>Idade : {formulario.idade} anos </li>
+                                
+                                <li style={{listStyle: 'none', padding: '0 8px'}}>Genêro : {formulario.genero} </li>
+                                
+                                <li style={{listStyle: 'none', padding: '0 8px'}}>Estado cívil : {formulario.estadoCivil} </li>
+                                
+                                <li style={{listStyle: 'none', padding: '0 8px'}}>Tipo de documento : {formulario.tipoDocumento} </li>
+                                
+                            </ul>
+                        </p>)}                      
                     </ol>
                     ))}
                 </div>
