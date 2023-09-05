@@ -62,11 +62,11 @@ class Form extends React.Component {
         }
     }
 
-    modalDetalhe = () => {
+    /* modalDetalhe = () => {
         this.setState({
             modal: !this.state.modal,
         })
-    }
+    } */
 
 
     handleChange = (event) => {
@@ -233,36 +233,37 @@ class Form extends React.Component {
                 <div className="tbody-div">
                 {this.state.dadosFormulariosEnviados.map((formulario, index) => (
                     <ol key={`${formulario.nome}-${formulario.idade}`}                      
-                    style={{display: 'flex', alignItems: 'center',
-                            borderBottom: "2px solid #a047ed" }}>
-                        <li style={{listStyle: 'none', padding: '0 8px'}}>{formulario.nome} </li>
-                        <span style={{color: "#a047ed"}}>  -  </span>
-                        <li style={{listStyle: 'none', padding: '0 8px'}}>{formulario.idade} anos </li>
-                        <span style={{color: "#a047ed"}}>  -  </span>
-                        <li style={{listStyle: 'none', padding: '0 8px'}}>Genêro {formulario.genero} </li>
-                        <span style={{color: "#a047ed"}}>  -  </span>
-                        <li style={{listStyle: 'none', padding: '0 8px'}}>Estado cívil {formulario.estadoCivil} </li>
-                        <span style={{color: "#a047ed"}}>  -  </span>
-                        <li style={{listStyle: 'none', padding: '0 8px'}}>{formulario.tipoDocumento} </li>
-                        < StyledResetButton onClick={() => this.handleReset(index)} > Reset </StyledResetButton> 
-                        <StyledSubmitButton onClick={() => this.modalDetalhe()}>
-                            {this.state.modal ? "Fechar" : "Detalhes" }
-                        </StyledSubmitButton>  
-                        {this.state.modal && (<p style={{color: "#fff"}}>
-                            <ul>
-                                <li style={{listStyle: 'none', padding: '0 8px'}}>Nome : {formulario.nome} </li>
-                                
-                                <li style={{listStyle: 'none', padding: '0 8px'}}>Idade : {formulario.idade} anos </li>
-                                
-                                <li style={{listStyle: 'none', padding: '0 8px'}}>Genêro : {formulario.genero} </li>
-                                
-                                <li style={{listStyle: 'none', padding: '0 8px'}}>Estado cívil : {formulario.estadoCivil} </li>
-                                
-                                <li style={{listStyle: 'none', padding: '0 8px'}}>Tipo de documento : {formulario.tipoDocumento} </li>
-                                
+                    style={{display: 'flex', alignItems: 'center', flexDirection: "column",
+                            }}>
+                            <ul className="resposta" style={{display: 'flex'}}>
+                                <li style={{listStyle: 'none', padding: '0 8px'}}>{formulario.nome} </li>
+                                <span style={{color: "#a047ed"}}>  -  </span>
+                                <li style={{listStyle: 'none', padding: '0 8px'}}>{formulario.idade} anos </li>
+                                <span style={{color: "#a047ed"}}>  -  </span>
+                                <li style={{listStyle: 'none', padding: '0 8px'}}>Genêro {formulario.genero} </li>
+                                <span style={{color: "#a047ed"}}>  -  </span>
+                                <li style={{listStyle: 'none', padding: '0 8px'}}>Estado cívil {formulario.estadoCivil} </li>
+                                <span style={{color: "#a047ed"}}>  -  </span>
+                                <li style={{listStyle: 'none', padding: '0 8px'}}>{formulario.tipoDocumento} </li>
+                                < StyledResetButton onClick={() => this.handleReset(index)} > Reset </StyledResetButton> 
+                                <StyledSubmitButton onClick={() => this.setState({modal: !this.state.modal})}>
+                                    {this.state.modal ? "Fechar" : "Detalhes" }
+                                </StyledSubmitButton>  
                             </ul>
-                        </p>)}                      
+                            {this.state.modal ? (
+                            <nav style={{ color: "#fff" }}>
+                                <ul style={{ padding: 0 }}>
+                                <li style={{ listStyle: 'none', padding: '4px', textAlign: 'start' }}>Nome : {formulario.nome} </li>
+                                <li style={{ listStyle: 'none', padding: '4px', textAlign: 'start' }}>Idade : {formulario.idade} anos </li>
+                                <li style={{ listStyle: 'none', padding: '4px', textAlign: 'start' }}>Genêro : {formulario.genero} </li>
+                                <li style={{ listStyle: 'none', padding: '4px', textAlign: 'start' }}>Estado cívil : {formulario.estadoCivil} </li>
+                                <li style={{ listStyle: 'none', padding: '4px', textAlign: 'start' }}>Tipo de documento : {formulario.tipoDocumento} </li>
+                                </ul>
+                            </nav>
+                            ) : null}    
+                        <span style={{borderBottom: "2px solid #a047ed", width: "40%"}}></span>                 
                     </ol>
+                    
                     ))}
                 </div>
             </table>
