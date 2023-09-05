@@ -11,15 +11,18 @@
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
-  background-color: #08000f;
+  background-color: #08000fc0;
+  border-radius: 8px;
   padding: 0 0 0 20px ;
 }
 
 body {
-  background-image: url(./components/assets/network.jpg);
+  background-image: url(https://images.pexels.com/photos/957040/night-photograph-starry-sky-night-sky-star-957040.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
   background-size: cover;
   background-repeat: no-repeat;
-  height: 200vh;
+  height: 100vh;
+  filter: brightness(80%);
+  background-color: #000;
 }
 
 form {
@@ -48,6 +51,8 @@ form input {
 
 select {
   border: 2px solid  #a047ed;
+  background-color: #08000fc0;
+  color: #f1f1f1;
   padding: 4px;
   margin-bottom: 8px;
   border-radius: 2px;

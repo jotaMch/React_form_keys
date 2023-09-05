@@ -57,7 +57,15 @@ class Form extends React.Component {
             loadingVisible: false,
             formularioEnviado: false,
             dadosFormulariosEnviados: [], // Array para armazenar os dados de todos os formulários enviados
+            modalVisible: false,
+            modal: false,
         }
+    }
+
+    modalDetalhe = () => {
+        this.setState({
+            modal: true,
+        })
     }
 
 
@@ -76,10 +84,6 @@ class Form extends React.Component {
             genero: value,
         });
     };
-    
-    
-    
-
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -93,7 +97,6 @@ class Form extends React.Component {
             estadoCivil: estadoCivil.value,
             tipoDocumento: tipoDocumento.value,
         };
-
         if (nome.value === "") {
             this.setState({
                 nome: {
@@ -107,7 +110,6 @@ class Form extends React.Component {
             });
             return; 
         }
-
         this.setState({ loadingVisible: true });
         setTimeout(() => {
             this.setState((prevState) => ({
@@ -135,6 +137,7 @@ class Form extends React.Component {
             dadosFormulariosEnviados: newDadosFormularios
         });
     }
+
 
     render() {
         return(
@@ -202,9 +205,7 @@ class Form extends React.Component {
                         <option value="viuvo">viúvo(a)</option>  
 
 
-                    </select>
-
-            
+                    </select>        
 
 
                     <div>
@@ -220,16 +221,10 @@ class Form extends React.Component {
                             <option value="cpf">CPF</option>
                             <option value="passaporte">CNPJ</option>
                         </select>
-
                     </div>
-
                     <StyledSubmitButton type="submit">Enviar</StyledSubmitButton>
-
-
                 </form>
-
                 {this.state.loadingVisible && <div className="loading"></div>}
-
         {this.state.dadosFormulariosEnviados.length > 0 && (
             <table className="table-div">
                 <div className="thead-div">
@@ -240,15 +235,19 @@ class Form extends React.Component {
                     <ol key={`${formulario.nome}-${formulario.idade}`}                      
                     style={{display: 'flex', alignItems: 'center'}}>
                         <li style={{listStyle: 'none', padding: '0 8px'}}>{formulario.nome} </li>
-                        <span>  -  </span>
+                        <span style={{color: "#a047ed"}}>  -  </span>
                         <li style={{listStyle: 'none', padding: '0 8px'}}>{formulario.idade} anos </li>
-                        <span>  -  </span>
+                        <span style={{color: "#a047ed"}}>  -  </span>
                         <li style={{listStyle: 'none', padding: '0 8px'}}>Genêro {formulario.genero} </li>
-                        <span>  -  </span>
+                        <span style={{color: "#a047ed"}}>  -  </span>
                         <li style={{listStyle: 'none', padding: '0 8px'}}>Estado cívil {formulario.estadoCivil} </li>
-                        <span>  -  </span>
+                        <span style={{color: "#a047ed"}}>  -  </span>
                         <li style={{listStyle: 'none', padding: '0 8px'}}>{formulario.tipoDocumento} </li>
                         < StyledResetButton onClick={() => this.handleReset(index)} > Reset </StyledResetButton> 
+                        <StyledSubmitButton onClick={() => this.modalDetalhe()}>
+                            {this.state.modal ? "ola" : "Detalhes" }
+                        </StyledSubmitButton>  
+                        {this.state.modal && (<p style={{color: "#fff"}}>ola</p>)}                      
                     </ol>
                     ))}
                 </div>
