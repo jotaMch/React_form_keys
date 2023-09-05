@@ -64,7 +64,7 @@ class Form extends React.Component {
 
     modalDetalhe = () => {
         this.setState({
-            modal: true,
+            modal: !this.state.modal,
         })
     }
 
@@ -233,7 +233,8 @@ class Form extends React.Component {
                 <div className="tbody-div">
                 {this.state.dadosFormulariosEnviados.map((formulario, index) => (
                     <ol key={`${formulario.nome}-${formulario.idade}`}                      
-                    style={{display: 'flex', alignItems: 'center'}}>
+                    style={{display: 'flex', alignItems: 'center',
+                            borderBottom: "2px solid #a047ed" }}>
                         <li style={{listStyle: 'none', padding: '0 8px'}}>{formulario.nome} </li>
                         <span style={{color: "#a047ed"}}>  -  </span>
                         <li style={{listStyle: 'none', padding: '0 8px'}}>{formulario.idade} anos </li>
@@ -245,7 +246,7 @@ class Form extends React.Component {
                         <li style={{listStyle: 'none', padding: '0 8px'}}>{formulario.tipoDocumento} </li>
                         < StyledResetButton onClick={() => this.handleReset(index)} > Reset </StyledResetButton> 
                         <StyledSubmitButton onClick={() => this.modalDetalhe()}>
-                            {this.state.modal ? "ola" : "Detalhes" }
+                            {this.state.modal ? "Fechar" : "Detalhes" }
                         </StyledSubmitButton>  
                         {this.state.modal && (<p style={{color: "#fff"}}>
                             <ul>
