@@ -6,7 +6,7 @@ const StyledSubmitButton = styled.button`
     background-color: #08000f;
     box-shadow: 0 0 6px #a047ed;
     color: white;
-    padding: 10px 20px;
+    padding: 4px 8px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -15,7 +15,7 @@ const StyledSubmitButton = styled.button`
 const StyledResetButton = styled.button`
     background-color: #c90036;
     color: white;
-    padding: 10px 20px;
+    padding: 4px 8px;
     margin: 10px;
     border: none;
     border-radius: 5px;
@@ -54,6 +54,9 @@ class Form extends React.Component {
             tipoDocumento: {
                 value: "rg", // valor padrão para o tipo de documento
             },
+            detalhesVisiveis: {},
+
+
             loadingVisible: false,
             formularioEnviado: false,
             dadosFormulariosEnviados: [], // Array para armazenar os dados de todos os formulários enviados
@@ -62,11 +65,14 @@ class Form extends React.Component {
         }
     }
 
-    /* modalDetalhe = () => {
-        this.setState({
-            modal: !this.state.modal,
-        })
-    } */
+    toggleDetalhes = (index) => {
+        this.setState((prevState) => ({
+            detalhesVisiveis: {
+                ...prevState.detalhesVisiveis,
+                [index]: !prevState.detalhesVisiveis[index],
+            },
+        }));
+    };
 
 
     handleChange = (event) => {
@@ -224,47 +230,58 @@ class Form extends React.Component {
                     </div>
                     <StyledSubmitButton type="submit">Enviar</StyledSubmitButton>
                 </form>
+
                 {this.state.loadingVisible && <div className="loading"></div>}
-        {this.state.dadosFormulariosEnviados.length > 0 && (
-            <table className="table-div">
-                <div className="thead-div">
-                    <h2>Lista de dados</h2>
-                </div>
-                <div className="tbody-div">
-                {this.state.dadosFormulariosEnviados.map((formulario, index) => (
-                    <ol key={`${formulario.nome}-${formulario.idade}`}                      
-                    style={{display: 'flex', alignItems: 'center', flexDirection: "column",
-                            }}>
-                            <ul className="resposta" style={{display: 'flex'}}>
-                                <li style={{listStyle: 'none', padding: '0 8px'}}>{formulario.nome} </li>
-                                <span style={{color: "#a047ed"}}>  -  </span>
-                                <li style={{listStyle: 'none', padding: '0 8px'}}>{formulario.idade} anos </li>
-                                <span style={{color: "#a047ed"}}>  -  </span>
-                                <li style={{listStyle: 'none', padding: '0 8px'}}>Genêro {formulario.genero} </li>
-                                <span style={{color: "#a047ed"}}>  -  </span>
-                                <li style={{listStyle: 'none', padding: '0 8px'}}>Estado cívil {formulario.estadoCivil} </li>
-                                <span style={{color: "#a047ed"}}>  -  </span>
-                                <li style={{listStyle: 'none', padding: '0 8px'}}>{formulario.tipoDocumento} </li>
-                                < StyledResetButton onClick={() => this.handleReset(index)} > Reset </StyledResetButton> 
-                                <StyledSubmitButton onClick={() => this.setState({modal: !this.state.modal})}>
-                                    {this.state.modal ? "Fechar" : "Detalhes" }
-                                </StyledSubmitButton>  
-                            </ul>
-                            {this.state.modal ? (
-                            <nav style={{ color: "#fff" }}>
-                                <ul style={{ padding: 0 }}>
-                                <li style={{ listStyle: 'none', padding: '4px', textAlign: 'start' }}>Nome : {formulario.nome} </li>
-                                <li style={{ listStyle: 'none', padding: '4px', textAlign: 'start' }}>Idade : {formulario.idade} anos </li>
-                                <li style={{ listStyle: 'none', padding: '4px', textAlign: 'start' }}>Genêro : {formulario.genero} </li>
-                                <li style={{ listStyle: 'none', padding: '4px', textAlign: 'start' }}>Estado cívil : {formulario.estadoCivil} </li>
-                                <li style={{ listStyle: 'none', padding: '4px', textAlign: 'start' }}>Tipo de documento : {formulario.tipoDocumento} </li>
+                {this.state.dadosFormulariosEnviados.length > 0 && (
+                <table className="table-div">
+                    <div className="thead-div">
+                        <h2>Lista de dados</h2>
+                    </div>
+
+                    <div className="tbody-div">
+                        {this.state.dadosFormulariosEnviados.map((formulario, index) => (
+                            <ol
+                                key={`${formulario.nome}-${formulario.idade}`}
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    flexDirection: "column",
+                                }}
+                            >
+
+                                <ul className="resposta" style={{ display: 'flex' }}>
+
+                                    <li style={{ listStyle: 'none', padding: '0 8px' }}>{formulario.nome} </li>
+                                    <span style={{ color: "#a047ed" }}>  -  </span>
+                                    <li style={{ listStyle: 'none', padding: '0 8px' }}>{formulario.idade} anos </li>
+                                    <span style={{ color: "#a047ed" }}>  -  </span>
+                                    <li style={{ listStyle: 'none', padding: '0 8px' }}>Genêro {formulario.genero} </li>
+                                    <span style={{ color: "#a047ed" }}>  -  </span>
+                                    <li style={{ listStyle: 'none', padding: '0 8px' }}>Estado cívil {formulario.estadoCivil} </li>
+                                    <span style={{ color: "#a047ed" }}>  -  </span>
+                                    <li style={{ listStyle: 'none', padding: '0 8px' }}>{formulario.tipoDocumento} </li>
+                                    <StyledResetButton onClick={() => this.handleReset(index)}>Reset</StyledResetButton>
+                                    <StyledSubmitButton onClick={() => this.toggleDetalhes(index)}>
+                                        {this.state.detalhesVisiveis[index] ? "Fechar" : "Detalhes"}
+                                    </StyledSubmitButton>
                                 </ul>
-                            </nav>
-                            ) : null}    
-                        <span style={{borderBottom: "2px solid #a047ed", width: "40%"}}></span>                 
-                    </ol>
-                    
-                    ))}
+                                {this.state.detalhesVisiveis[index] && (
+                                    <nav style={{ color: "#fff" }}>
+                                        <ul style={{ padding: 0 }}>
+                                            <li style={{ listStyle: 'none', padding: '4px', textAlign: 'start' }}>Nome : {formulario.nome} </li>
+                                            <li style={{ listStyle: 'none', padding: '4px', textAlign: 'start' }}>Idade : {formulario.idade} anos </li>
+                                            <li style={{ listStyle: 'none', padding: '4px', textAlign: 'start' }}>Genêro : {formulario.genero} </li>
+                                            <li style={{ listStyle: 'none', padding: '4px', textAlign: 'start' }}>Estado cívil : {formulario.estadoCivil} </li>
+                                            <li style={{ listStyle: 'none', padding: '4px', textAlign: 'start' }}>Tipo de documento : {formulario.tipoDocumento} </li>
+                                        </ul>
+                                    </nav>
+                                )}
+
+                                
+
+                            </ol>
+                        
+                        ))}
                 </div>
             </table>
             )}
