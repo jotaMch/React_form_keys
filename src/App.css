@@ -94,6 +94,32 @@ form button:hover {
   top: 40%;
 }
 
+nav {
+  background-color: #23012d;
+  padding: 4px;
+  border-radius: 8px;
+  position: absolute;
+  left: 40%;
+  top: 10%;
+  bottom: 10%;
+  right: 8%;
+}
+
+nav li {
+  width: 100%;
+}
+
+nav svg {
+  position: absolute;
+  right: 1%;
+  top: 1%;
+}
+
+nav svg:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -143,7 +169,7 @@ form button:hover {
 .tbody-div li {
   color: aliceblue;
   text-align: center;
-  max-width: 250px;
+  /* max-width: 250px; */
 }
 
 

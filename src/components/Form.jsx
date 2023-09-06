@@ -1,5 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
+import { BiSolidXCircle } from 'react-icons/bi';
+
 
 
 const StyledSubmitButton = styled.button`
@@ -14,6 +16,17 @@ const StyledSubmitButton = styled.button`
 
 const StyledResetButton = styled.button`
     background-color: #c90036;
+    color: white;
+    padding: 4px 8px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+`;
+
+
+const StyledDetalhesButton = styled.button`
+    background-color: #260019;
     color: white;
     padding: 4px 8px;
     margin: 10px;
@@ -261,18 +274,22 @@ class Form extends React.Component {
                                     <span style={{ color: "#a047ed" }}>  -  </span>
                                     <li style={{ listStyle: 'none', padding: '0 8px' }}>{formulario.tipoDocumento} </li>
                                     <StyledResetButton onClick={() => this.handleReset(index)}>Reset</StyledResetButton>
-                                    <StyledSubmitButton onClick={() => this.toggleDetalhes(index)}>
+                                    <StyledDetalhesButton onClick={() => this.toggleDetalhes(index)}>
                                         {this.state.detalhesVisiveis[index] ? "Fechar" : "Detalhes"}
-                                    </StyledSubmitButton>
+                                    </StyledDetalhesButton>
                                 </ul>
                                 {this.state.detalhesVisiveis[index] && (
-                                    <nav style={{ color: "#fff" }}>
+                                    <nav  style={{ color: "#fff"}}>
+                                        
                                         <ul style={{ padding: 0 }}>
                                             <li style={{ listStyle: 'none', padding: '4px', textAlign: 'start' }}>Nome : {formulario.nome} </li>
                                             <li style={{ listStyle: 'none', padding: '4px', textAlign: 'start' }}>Idade : {formulario.idade} anos </li>
                                             <li style={{ listStyle: 'none', padding: '4px', textAlign: 'start' }}>Genêro : {formulario.genero} </li>
                                             <li style={{ listStyle: 'none', padding: '4px', textAlign: 'start' }}>Estado cívil : {formulario.estadoCivil} </li>
                                             <li style={{ listStyle: 'none', padding: '4px', textAlign: 'start' }}>Tipo de documento : {formulario.tipoDocumento} </li>
+                                            <span>
+                                            <BiSolidXCircle onClick={() => this.toggleDetalhes(index)} />
+                                            </span>
                                         </ul>
                                     </nav>
                                 )}
