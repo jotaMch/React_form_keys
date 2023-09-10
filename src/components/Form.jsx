@@ -18,6 +18,7 @@ const StyledResetButton = styled.button`
     background-color: #c90036;
     color: white;
     padding: 4px 8px;
+    height: 40px;              
     margin: 10px;
     border: none;
     border-radius: 5px;
@@ -29,6 +30,7 @@ const StyledDetalhesButton = styled.button`
     background-color: #260019;
     color: white;
     padding: 4px 8px;
+    height: 40px;     
     margin: 10px;
     border: none;
     border-radius: 5px;
